@@ -8,10 +8,9 @@ code:
 <p><li> Create abstract Controller class to support controllers other than PS2 (future work).
 </ul>
 
-In order to compile this code in Arduino, you will need to install this library:
-http://www.billporter.info/2010/06/05/playstation-2-controller-arduino-library-v1-0/
+In order to compile this code in Arduino, you will need to install the library
+for the PS2 controller.  We recommend using our 
+[cleaned-up version](https://github.com/simondlevy/PS2X_lib)
+of the 
+library, which eliminates compiler warnings.
 
-Please make sure you add the relevant files in your /Arduino/libraries/ folder.
-
-You can find a copy of this library on the Lynxmotion GitHub here:
-https://github.com/Lynxmotion/Arduino-PS2X
