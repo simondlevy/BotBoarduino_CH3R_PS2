@@ -41,29 +41,29 @@
 //Since the tables are overlapping the full range of 127+127+64 is not necessary. Total bytes: 277
 
 static const byte GetACos[] PROGMEM = {    
-                    255,254,252,251,250,249,247,246,245,243,242,241,240,238,237,236,234,233,232,231,229,228,227,225, 
-                    224,223,221,220,219,217,216,215,214,212,211,210,208,207,206,204,203,201,200,199,197,196,195,193, 
-                    192,190,189,188,186,185,183,182,181,179,178,176,175,173,172,170,169,167,166,164,163,161,160,158, 
-                    157,155,154,152,150,149,147,146,144,142,141,139,137,135,134,132,130,128,127,125,123,121,119,117, 
-                    115,113,111,109,107,105,103,101,98,96,94,92,89,87,84,81,79,76,73,73,73,72,72,72,71,71,71,70,70, 
-                    70,70,69,69,69,68,68,68,67,67,67,66,66,66,65,65,65,64,64,64,63,63,63,62,62,62,61,61,61,60,60,59,
-                    59,59,58,58,58,57,57,57,56,56,55,55,55,54,54,53,53,53,52,52,51,51,51,50,50,49,49,48,48,47,47,47,
-                    46,46,45,45,44,44,43,43,42,42,41,41,40,40,39,39,38,37,37,36,36,35,34,34,33,33,32,31,31,30,29,28,
-                    28,27,26,25,24,23,23,23,23,22,22,22,22,21,21,21,21,20,20,20,19,19,19,19,18,18,18,17,17,17,17,16,
-                    16,16,15,15,15,14,14,13,13,13,12,12,11,11,10,10,9,9,8,7,6,6,5,3,0 };//
-                    
+    255,254,252,251,250,249,247,246,245,243,242,241,240,238,237,236,234,233,232,231,229,228,227,225, 
+    224,223,221,220,219,217,216,215,214,212,211,210,208,207,206,204,203,201,200,199,197,196,195,193, 
+    192,190,189,188,186,185,183,182,181,179,178,176,175,173,172,170,169,167,166,164,163,161,160,158, 
+    157,155,154,152,150,149,147,146,144,142,141,139,137,135,134,132,130,128,127,125,123,121,119,117, 
+    115,113,111,109,107,105,103,101,98,96,94,92,89,87,84,81,79,76,73,73,73,72,72,72,71,71,71,70,70, 
+    70,70,69,69,69,68,68,68,67,67,67,66,66,66,65,65,65,64,64,64,63,63,63,62,62,62,61,61,61,60,60,59,
+    59,59,58,58,58,57,57,57,56,56,55,55,55,54,54,53,53,53,52,52,51,51,51,50,50,49,49,48,48,47,47,47,
+    46,46,45,45,44,44,43,43,42,42,41,41,40,40,39,39,38,37,37,36,36,35,34,34,33,33,32,31,31,30,29,28,
+    28,27,26,25,24,23,23,23,23,22,22,22,22,21,21,21,21,20,20,20,19,19,19,19,18,18,18,17,17,17,17,16,
+    16,16,15,15,15,14,14,13,13,13,12,12,11,11,10,10,9,9,8,7,6,6,5,3,0 };//
+
 //Sin table 90 deg, persision 0.5 deg [180 values]
 static const word GetSin[] PROGMEM = {0, 87, 174, 261, 348, 436, 523, 610, 697, 784, 871, 958, 1045, 1132, 1218, 1305, 1391, 1478, 1564, 
-                 1650, 1736, 1822, 1908, 1993, 2079, 2164, 2249, 2334, 2419, 2503, 2588, 2672, 2756, 2840, 2923, 3007, 
-                 3090, 3173, 3255, 3338, 3420, 3502, 3583, 3665, 3746, 3826, 3907, 3987, 4067, 4146, 4226, 4305, 4383, 
-                 4461, 4539, 4617, 4694, 4771, 4848, 4924, 4999, 5075, 5150, 5224, 5299, 5372, 5446, 5519, 5591, 5664, 
-                 5735, 5807, 5877, 5948, 6018, 6087, 6156, 6225, 6293, 6360, 6427, 6494, 6560, 6626, 6691, 6755, 6819, 
-                 6883, 6946, 7009, 7071, 7132, 7193, 7253, 7313, 7372, 7431, 7489, 7547, 7604, 7660, 7716, 7771, 7826, 
-                 7880, 7933, 7986, 8038, 8090, 8141, 8191, 8241, 8290, 8338, 8386, 8433, 8480, 8526, 8571, 8616, 8660, 
-                 8703, 8746, 8788, 8829, 8870, 8910, 8949, 8987, 9025, 9063, 9099, 9135, 9170, 9205, 9238, 9271, 9304, 
-                 9335, 9366, 9396, 9426, 9455, 9483, 9510, 9537, 9563, 9588, 9612, 9636, 9659, 9681, 9702, 9723, 9743, 
-                 9762, 9781, 9799, 9816, 9832, 9848, 9862, 9876, 9890, 9902, 9914, 9925, 9935, 9945, 9953, 9961, 9969, 
-                 9975, 9981, 9986, 9990, 9993, 9996, 9998, 9999, 10000 };//
+    1650, 1736, 1822, 1908, 1993, 2079, 2164, 2249, 2334, 2419, 2503, 2588, 2672, 2756, 2840, 2923, 3007, 
+    3090, 3173, 3255, 3338, 3420, 3502, 3583, 3665, 3746, 3826, 3907, 3987, 4067, 4146, 4226, 4305, 4383, 
+    4461, 4539, 4617, 4694, 4771, 4848, 4924, 4999, 5075, 5150, 5224, 5299, 5372, 5446, 5519, 5591, 5664, 
+    5735, 5807, 5877, 5948, 6018, 6087, 6156, 6225, 6293, 6360, 6427, 6494, 6560, 6626, 6691, 6755, 6819, 
+    6883, 6946, 7009, 7071, 7132, 7193, 7253, 7313, 7372, 7431, 7489, 7547, 7604, 7660, 7716, 7771, 7826, 
+    7880, 7933, 7986, 8038, 8090, 8141, 8191, 8241, 8290, 8338, 8386, 8433, 8480, 8526, 8571, 8616, 8660, 
+    8703, 8746, 8788, 8829, 8870, 8910, 8949, 8987, 9025, 9063, 9099, 9135, 9170, 9205, 9238, 9271, 9304, 
+    9335, 9366, 9396, 9426, 9455, 9483, 9510, 9537, 9563, 9588, 9612, 9636, 9659, 9681, 9702, 9723, 9743, 
+    9762, 9781, 9799, 9816, 9832, 9848, 9862, 9876, 9890, 9902, 9914, 9925, 9935, 9945, 9953, 9961, 9969, 
+    9975, 9981, 9986, 9990, 9993, 9996, 9998, 9999, 10000 };//
 
 
 //Build tables for Leg configuration like I/O and MIN/imax values to easy access values using a FOR loop
@@ -282,7 +282,7 @@ extern void CheckAngles();
 
 extern void    PrintSystemStuff(void);            // Try to see why we fault...
 
-         
+
 extern void BalCalcOneLeg (short PosX, short PosZ, short PosY, byte BalLegNr);
 extern void BodyFK (short PosX, short PosZ, short PosY, short RotationY, byte BodyIKLeg) ;
 extern void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegNr);
@@ -294,8 +294,6 @@ extern short GetATan2 (short AtanX, short AtanY);
 // SETUP: the main arduino setup function.
 //--------------------------------------------------------------------------
 void setup(){
-      
-    int error;
 
     g_fShowDebugPrompt = true;
     g_fDebugOutput = false;
@@ -304,13 +302,13 @@ void setup(){
 #endif
     // Init our ServoDriver
     g_ServoDriver.Init();
-    
+
     pinMode(PS2_CMD, INPUT);
     if(!digitalRead(PS2_CMD))
-      g_ServoDriver.SSCForwarder();
+        g_ServoDriver.SSCForwarder();
 
-   //Checks to see if our Servo Driver support a GP Player
-//    DBGSerial.write("Program Start\n\r");
+    //Checks to see if our Servo Driver support a GP Player
+    //    DBGSerial.write("Program Start\n\r");
     // debug stuff
     delay(10);
 
@@ -320,7 +318,7 @@ void setup(){
     LedB = 0;
     LedC = 0;
     Eyes = 0;
-         
+
     //Tars Init Positions
     for (LegIndex= 0; LegIndex <= 5; LegIndex++ )
     {
@@ -328,16 +326,16 @@ void setup(){
         LegPosY[LegIndex] = (short)pgm_read_word(&cInitPosY[LegIndex]);
         LegPosZ[LegIndex] = (short)pgm_read_word(&cInitPosZ[LegIndex]);  
     }
-    
+
     //Single leg control. Make sure no leg is selected
     g_InControlState.SelectedLeg = 255; // No Leg selected
     PrevSelectedLeg = 255;
-    
+
     //Body Positions
     g_InControlState.BodyPos.x = 0;
     g_InControlState.BodyPos.y = 0;
     g_InControlState.BodyPos.z = 0;
-        
+
     //Body Rotations
     g_InControlState.BodyRot1.x = 0;
     g_InControlState.BodyRot1.y = 0;
@@ -345,24 +343,24 @@ void setup(){
     BodyRotOffsetX = 0;
     BodyRotOffsetY = 0;        //Input Y offset value to adjust centerpoint of rotation
     BodyRotOffsetZ = 0;
-    
-        
+
+
     //Gait
     g_InControlState.GaitType = 1;  // 0; Devon wanted 
     g_InControlState.BalanceMode = 0;
     g_InControlState.LegLiftHeight = 50;
     GaitStep = 1;
     GaitSelect();
-    
+
     g_InputController.Init();
-    
+
     // Servo Driver
     ServoMoveTime = 150;
     g_InControlState.fHexOn = 0;
     g_fLowVoltageShutdown = false;
 }
 
-    
+
 //=============================================================================
 // Loop: the main arduino main Loop function
 //=============================================================================
@@ -376,9 +374,9 @@ void loop(void)
     CheckVoltage();        // check our voltages...
     if (!g_fLowVoltageShutdown)
         g_InputController.ControlInput();
-    
+
     WriteOutputs();        // Write Outputs
-    
+
 
 #ifdef OPT_GPPLAYER
     //GP Player
@@ -387,10 +385,10 @@ void loop(void)
 
     //Single leg control
     SingleLegControl ();
-            
+
     //Gait
     GaitSeq();
-             
+
     //Balance calculations
     TotalTransX = 0;     //reset values used for calculation of balance
     TotalTransZ = 0;
@@ -402,36 +400,36 @@ void loop(void)
         for (LegIndex = 0; LegIndex <= 2; LegIndex++) {    // balance calculations for all Right legs
 
             BalCalcOneLeg (-LegPosX[LegIndex]+GaitPosX[LegIndex], 
-                        LegPosZ[LegIndex]+GaitPosZ[LegIndex], 
-                        (LegPosY[LegIndex]-(short)pgm_read_word(&cInitPosY[LegIndex]))+GaitPosY[LegIndex], LegIndex);
+                    LegPosZ[LegIndex]+GaitPosZ[LegIndex], 
+                    (LegPosY[LegIndex]-(short)pgm_read_word(&cInitPosY[LegIndex]))+GaitPosY[LegIndex], LegIndex);
         }
 
         for (LegIndex = 3; LegIndex <= 5; LegIndex++) {    // balance calculations for all Right legs
             BalCalcOneLeg(LegPosX[LegIndex]+GaitPosX[LegIndex], 
-                        LegPosZ[LegIndex]+GaitPosZ[LegIndex], 
-                        (LegPosY[LegIndex]-(short)pgm_read_word(&cInitPosY[LegIndex]))+GaitPosY[LegIndex], LegIndex);
+                    LegPosZ[LegIndex]+GaitPosZ[LegIndex], 
+                    (LegPosY[LegIndex]-(short)pgm_read_word(&cInitPosY[LegIndex]))+GaitPosY[LegIndex], LegIndex);
         }
         BalanceBody();
     }
 
-          
- //Reset IKsolution indicators 
-     IKSolution = 0 ;
-     IKSolutionWarning = 0; 
-     IKSolutionError = 0 ;
-            
-     //Do IK for all Right legs
-     for (LegIndex = 0; LegIndex <=2; LegIndex++) {    
+
+    //Reset IKsolution indicators 
+    IKSolution = 0 ;
+    IKSolutionWarning = 0; 
+    IKSolutionError = 0 ;
+
+    //Do IK for all Right legs
+    for (LegIndex = 0; LegIndex <=2; LegIndex++) {    
         BodyFK(-LegPosX[LegIndex]+g_InControlState.BodyPos.x+GaitPosX[LegIndex] - TotalTransX,
                 LegPosZ[LegIndex]+g_InControlState.BodyPos.z+GaitPosZ[LegIndex] - TotalTransZ,
                 LegPosY[LegIndex]+g_InControlState.BodyPos.y+GaitPosY[LegIndex] - TotalTransY,
                 GaitRotY[LegIndex], LegIndex);
-                               
+
         LegIK (LegPosX[LegIndex]-g_InControlState.BodyPos.x+BodyFKPosX-(GaitPosX[LegIndex] - TotalTransX), 
                 LegPosY[LegIndex]+g_InControlState.BodyPos.y-BodyFKPosY+GaitPosY[LegIndex] - TotalTransY,
                 LegPosZ[LegIndex]+g_InControlState.BodyPos.z-BodyFKPosZ+GaitPosZ[LegIndex] - TotalTransZ, LegIndex);
     }
-          
+
     //Do IK for all Left legs  
     for (LegIndex = 3; LegIndex <=5; LegIndex++) {
         BodyFK(LegPosX[LegIndex]-g_InControlState.BodyPos.x+GaitPosX[LegIndex] - TotalTransX,
@@ -445,11 +443,11 @@ void loop(void)
 
     //Check mechanical limits
     CheckAngles();
-                
+
     //Write IK errors to leds
     LedC = IKSolutionWarning;
     LedA = IKSolutionError;
-            
+
     //Drive Servos
     if (g_InControlState.fHexOn) {
         if (g_InControlState.fHexOn && !g_InControlState.fPrev_HexOn) {
@@ -460,27 +458,27 @@ void loop(void)
 
             Eyes = 1;
         }
-        
+
         //Calculate Servo Move time
         if ((abs(g_InControlState.TravelLength.x)>cTravelDeadZone) || (abs(g_InControlState.TravelLength.z)>cTravelDeadZone) ||
                 (abs(g_InControlState.TravelLength.y*2)>cTravelDeadZone)) {         
             ServoMoveTime = NomGaitSpeed + (g_InControlState.InputTimeDelay*2) + g_InControlState.SpeedControl;
-                
+
             //Add aditional delay when Balance mode is on
             if (g_InControlState.BalanceMode)
                 ServoMoveTime = ServoMoveTime + 100;
         } else //Movement speed excl. Walking
             ServoMoveTime = 200 + g_InControlState.SpeedControl;
-        
+
         // note we broke up the servo driver into start/commit that way we can output all of the servo information
         // before we wait and only have the termination information to output after the wait.  That way we hopefully
         // be more accurate with our timings...
         StartUpdateServos();
-        
+
         // See if we need to sync our processor with the servo driver while walking to ensure the prev is completed before sending the next one
-                
+
         fContinueWalking = false;
-            
+
         // Finding any incident of GaitPos/Rot <>0:
         for (LegIndex = 0; LegIndex <= 5; LegIndex++) {
             if ( (GaitPosX[LegIndex] > 2) || (GaitPosX[LegIndex] < -2)
@@ -494,20 +492,20 @@ void loop(void)
         if (fWalking || fContinueWalking) {
             word  wDelayTime;
             fWalking = fContinueWalking;
-                  
+
             //Get endtime and calculate wait time
             lTimerEnd = millis();
             if (lTimerEnd > lTimerStart)
                 CycleTime = lTimerEnd-lTimerStart;
             else
                 CycleTime = 0xffffffffL - lTimerEnd + lTimerStart + 1;
-            
+
             // if it is less, use the last cycle time...
             //Wait for previous commands to be completed while walking
-            wDelayTime = (min(max ((PrevServoMoveTime - CycleTime), 1), NomGaitSpeed));
+            wDelayTime = (min(max ((PrevServoMoveTime - CycleTime), 1), (word)NomGaitSpeed));
             delay (wDelayTime); 
         }
-        
+
     } else {
         //Turn the bot off
         if (g_InControlState.fPrev_HexOn || (AllDown= 0)) {
@@ -523,7 +521,7 @@ void loop(void)
             g_ServoDriver.FreeServos();
             Eyes = 0;
         }
-            // We also have a simple debug monitor that allows us to 
+        // We also have a simple debug monitor that allows us to 
         // check things. call it here..
 #ifdef OPT_TERMINAL_MONITOR  
         if (TerminalMonitor())
@@ -568,7 +566,7 @@ void StartUpdateServos()
 //--------------------------------------------------------------------
 void WriteOutputs(void)
 {
- #ifdef cEyesPin
+#ifdef cEyesPin
     digitalWrite(cEyesPin, Eyes);
 #endif        
 }
@@ -587,61 +585,61 @@ bool CheckVoltage() {
 #ifdef DBGSerial          
             DBGSerial.println("Voltage went low, turn off robot");
 #endif            
-	     //Turn off
-	    g_InControlState.BodyPos.x = 0;
-	    g_InControlState.BodyPos.y = 0;
-	    g_InControlState.BodyPos.z = 0;
-	    g_InControlState.BodyRot1.x = 0;
-	    g_InControlState.BodyRot1.y = 0;
-	    g_InControlState.BodyRot1.z = 0;
-	    g_InControlState.TravelLength.x = 0;
-	    g_InControlState.TravelLength.z = 0;
-	    g_InControlState.TravelLength.y = 0;
-	    g_InControlState.SelectedLeg = 255;
-	    g_fLowVoltageShutdown = 1;
+            //Turn off
+            g_InControlState.BodyPos.x = 0;
+            g_InControlState.BodyPos.y = 0;
+            g_InControlState.BodyPos.z = 0;
+            g_InControlState.BodyRot1.x = 0;
+            g_InControlState.BodyRot1.y = 0;
+            g_InControlState.BodyRot1.z = 0;
+            g_InControlState.TravelLength.x = 0;
+            g_InControlState.TravelLength.z = 0;
+            g_InControlState.TravelLength.y = 0;
+            g_InControlState.SelectedLeg = 255;
+            g_fLowVoltageShutdown = 1;
             s_bLVBeepCnt = 0;    // how many times we beeped...
-	    g_InControlState.fHexOn = false;
-	}
+            g_InControlState.fHexOn = false;
+        }
 #ifdef cTurnOnVol
     } else if ((Voltage > cTurnOnVol) && (Voltage < 1999)) {
 #ifdef DBGSerial
-            DBGSerial.println("Voltage restored");
+        DBGSerial.println("Voltage restored");
 #endif          
-            g_fLowVoltageShutdown = 0;
-            
+        g_fLowVoltageShutdown = 0;
+
 #endif      
     } else {
         if (s_bLVBeepCnt < 5) {
-          s_bLVBeepCnt++;
-          MSound(SOUND_PIN, 1, 45, 2000);
+            s_bLVBeepCnt++;
+            MSound(SOUND_PIN, 1, 45, 2000);
         }
         delay(2000);
     }
 #endif	
 #endif
-  return g_fLowVoltageShutdown;
+    return g_fLowVoltageShutdown;
 }
- 
+
 //--------------------------------------------------------------------
 //[SINGLE LEG CONTROL]
 void SingleLegControl(void)
 {
 
-  //Check if all legs are down
+    //Check if all legs are down
     AllDown = (LegPosY[cRF]==(short)pgm_read_word(&cInitPosY[cRF])) && 
-              (LegPosY[cRM]==(short)pgm_read_word(&cInitPosY[cRM])) && 
-              (LegPosY[cRR]==(short)pgm_read_word(&cInitPosY[cRR])) && 
-              (LegPosY[cLR]==(short)pgm_read_word(&cInitPosY[cLR])) && 
-              (LegPosY[cLM]==(short)pgm_read_word(&cInitPosY[cLM])) && 
-              (LegPosY[cLF]==(short)pgm_read_word(&cInitPosY[cLF]));
+        (LegPosY[cRM]==(short)pgm_read_word(&cInitPosY[cRM])) && 
+        (LegPosY[cRR]==(short)pgm_read_word(&cInitPosY[cRR])) && 
+        (LegPosY[cLR]==(short)pgm_read_word(&cInitPosY[cLR])) && 
+        (LegPosY[cLM]==(short)pgm_read_word(&cInitPosY[cLM])) && 
+        (LegPosY[cLF]==(short)pgm_read_word(&cInitPosY[cLF]));
 
     if (g_InControlState.SelectedLeg<=5) {
         if (g_InControlState.SelectedLeg!=PrevSelectedLeg) {
             if (AllDown) { //Lift leg a bit when it got selected
                 LegPosY[g_InControlState.SelectedLeg] = (short)pgm_read_word(&cInitPosY[g_InControlState.SelectedLeg])-20;
-        
+
                 //Store current status
-                 PrevSelectedLeg = g_InControlState.SelectedLeg;
+                PrevSelectedLeg = g_InControlState.SelectedLeg;
             } else {//Return prev leg back to the init position
                 LegPosX[PrevSelectedLeg] = (short)pgm_read_word(&cInitPosX[PrevSelectedLeg]);
                 LegPosY[PrevSelectedLeg] = (short)pgm_read_word(&cInitPosY[PrevSelectedLeg]);
@@ -661,7 +659,7 @@ void SingleLegControl(void)
             }
         } 
         if (PrevSelectedLeg!=255)
-           PrevSelectedLeg = 255;
+            PrevSelectedLeg = 255;
     }
 }
 
@@ -679,7 +677,7 @@ void GaitSelect(void)
             GaitLegNr[cRR] = 7;
             GaitLegNr[cLF] = 9;
             GaitLegNr[cRM] = 11;
-            
+
             NrLiftedPos = 3;
             HalfLiftHeigth = 3;
             TLDivFactor = 8;      
@@ -694,7 +692,7 @@ void GaitSelect(void)
             GaitLegNr[cRR] = 1;
             GaitLegNr[cLF] = 5;
             GaitLegNr[cRM] = 5;
-                
+
             NrLiftedPos = 3;
             HalfLiftHeigth = 3;
             TLDivFactor = 4;
@@ -709,7 +707,7 @@ void GaitSelect(void)
             GaitLegNr[cLF] = 9;
             GaitLegNr[cRM] = 10;
             GaitLegNr[cLR] = 11;
-                
+
             NrLiftedPos = 3;
             HalfLiftHeigth = 3;
             TLDivFactor = 8;
@@ -724,7 +722,7 @@ void GaitSelect(void)
             GaitLegNr[cLF] = 12;
             GaitLegNr[cRM] = 13;
             GaitLegNr[cLR] = 14;
-                
+
             NrLiftedPos = 5;
             HalfLiftHeigth = 1;
             TLDivFactor = 10;
@@ -736,11 +734,11 @@ void GaitSelect(void)
             GaitLegNr[cLR] = 1;
             GaitLegNr[cRF] = 21;
             GaitLegNr[cLM] = 5;
-            
+
             GaitLegNr[cRR] = 13;
             GaitLegNr[cLF] = 9;
             GaitLegNr[cRM] = 17;
-                
+
             NrLiftedPos = 3;
             HalfLiftHeigth = 3;
             TLDivFactor = 20;      
@@ -757,16 +755,16 @@ void GaitSeq(void)
     //Check if the Gait is in motion
     TravelRequest = ((abs(g_InControlState.TravelLength.x)>cTravelDeadZone) || (abs(g_InControlState.TravelLength.z)>cTravelDeadZone) || (abs(g_InControlState.TravelLength.y)>cTravelDeadZone));
     if (NrLiftedPos == 5)
-  	LiftDivFactor = 4;    
+        LiftDivFactor = 4;    
     else  
- 	LiftDivFactor = 2;
+        LiftDivFactor = 2;
 
-   //Calculate Gait sequence
+    //Calculate Gait sequence
     LastLeg = 0;
     for (LegIndex = 0; LegIndex <= 5; LegIndex++) { // for all legs
         if (LegIndex == 5) // last leg
             LastLeg = 1 ;
-    
+
         Gait(LegIndex);
     }    // next leg
 }
@@ -777,7 +775,7 @@ void GaitSeq(void)
 void Gait (byte GaitCurrentLegNr)
 {
 
-    
+
     //Clear values under the cTravelDeadZone
     if (!TravelRequest) {    
         g_InControlState.TravelLength.x=0;
@@ -787,8 +785,8 @@ void Gait (byte GaitCurrentLegNr)
     //Leg middle up position
     //Gait in motion														  									Gait NOT in motion, return to home position
     if ((TravelRequest && (NrLiftedPos==1 || NrLiftedPos==3 || NrLiftedPos==5) && 
-            GaitStep==GaitLegNr[GaitCurrentLegNr]) || (!TravelRequest && GaitStep==GaitLegNr[GaitCurrentLegNr] && ((abs(GaitPosX[GaitCurrentLegNr])>2) || 
-                (abs(GaitPosZ[GaitCurrentLegNr])>2) || (abs(GaitRotY[GaitCurrentLegNr])>2)))) { //Up
+                GaitStep==GaitLegNr[GaitCurrentLegNr]) || (!TravelRequest && GaitStep==GaitLegNr[GaitCurrentLegNr] && ((abs(GaitPosX[GaitCurrentLegNr])>2) || 
+                        (abs(GaitPosZ[GaitCurrentLegNr])>2) || (abs(GaitRotY[GaitCurrentLegNr])>2)))) { //Up
         GaitPosX[GaitCurrentLegNr] = 0;
         GaitPosY[GaitCurrentLegNr] = -g_InControlState.LegLiftHeight;
         GaitPosZ[GaitCurrentLegNr] = 0;
@@ -796,14 +794,14 @@ void Gait (byte GaitCurrentLegNr)
     }
     //Optional Half heigth Rear (2, 3, 5 lifted positions)
     else if (((NrLiftedPos==2 && GaitStep==GaitLegNr[GaitCurrentLegNr]) || (NrLiftedPos>=3 && 
-            (GaitStep==GaitLegNr[GaitCurrentLegNr]-1 || GaitStep==GaitLegNr[GaitCurrentLegNr]+(StepsInGait-1))))
+                    (GaitStep==GaitLegNr[GaitCurrentLegNr]-1 || GaitStep==GaitLegNr[GaitCurrentLegNr]+(StepsInGait-1))))
             && TravelRequest) {
         GaitPosX[GaitCurrentLegNr] = -g_InControlState.TravelLength.x/LiftDivFactor;
         GaitPosY[GaitCurrentLegNr] = -3*g_InControlState.LegLiftHeight/(3+HalfLiftHeigth);     //Easier to shift between div factor: /1 (3/3), /2 (3/6) and 3/4
         GaitPosZ[GaitCurrentLegNr] = -g_InControlState.TravelLength.z/LiftDivFactor;
         GaitRotY[GaitCurrentLegNr] = -g_InControlState.TravelLength.y/LiftDivFactor;
     }    
-  	  
+
     // Optional Half heigth front (2, 3, 5 lifted positions)
     else if ((NrLiftedPos>=2) && (GaitStep==GaitLegNr[GaitCurrentLegNr]+1 || GaitStep==GaitLegNr[GaitCurrentLegNr]-(StepsInGait-1)) && TravelRequest) {
         GaitPosX[GaitCurrentLegNr] = g_InControlState.TravelLength.x/LiftDivFactor;
@@ -814,11 +812,11 @@ void Gait (byte GaitCurrentLegNr)
 
     //Optional Half heigth Rear 5 LiftedPos (5 lifted positions)
     else if (((NrLiftedPos==5 && (GaitStep==GaitLegNr[GaitCurrentLegNr]-2 ))) && TravelRequest) {
-	GaitPosX[GaitCurrentLegNr] = -g_InControlState.TravelLength.x/2;
+        GaitPosX[GaitCurrentLegNr] = -g_InControlState.TravelLength.x/2;
         GaitPosY[GaitCurrentLegNr] = -g_InControlState.LegLiftHeight/2;
         GaitPosZ[GaitCurrentLegNr] = -g_InControlState.TravelLength.z/2;
         GaitRotY[GaitCurrentLegNr] = -g_InControlState.TravelLength.y/2;
-     }  		
+    }  		
 
     //Optional Half heigth Front 5 LiftedPos (5 lifted positions)
     else if ((NrLiftedPos==5) && (GaitStep==GaitLegNr[GaitCurrentLegNr]+2 || GaitStep==GaitLegNr[GaitCurrentLegNr]-(StepsInGait-2)) && TravelRequest) {
@@ -828,8 +826,8 @@ void Gait (byte GaitCurrentLegNr)
         GaitRotY[GaitCurrentLegNr] = g_InControlState.TravelLength.y/2;
     }
 
-  //Leg front down position
-  else if ((GaitStep==GaitLegNr[GaitCurrentLegNr]+NrLiftedPos || GaitStep==GaitLegNr[GaitCurrentLegNr]-(StepsInGait-NrLiftedPos))
+    //Leg front down position
+    else if ((GaitStep==GaitLegNr[GaitCurrentLegNr]+NrLiftedPos || GaitStep==GaitLegNr[GaitCurrentLegNr]-(StepsInGait-NrLiftedPos))
             && GaitPosY[GaitCurrentLegNr]<0) {
         GaitPosX[GaitCurrentLegNr] = g_InControlState.TravelLength.x/2;
         GaitPosZ[GaitCurrentLegNr] = g_InControlState.TravelLength.z/2;
@@ -844,13 +842,13 @@ void Gait (byte GaitCurrentLegNr)
         GaitPosZ[GaitCurrentLegNr] = GaitPosZ[GaitCurrentLegNr] - (g_InControlState.TravelLength.z/TLDivFactor);
         GaitRotY[GaitCurrentLegNr] = GaitRotY[GaitCurrentLegNr] - (g_InControlState.TravelLength.y/TLDivFactor);
     }
-   
+
 
     //Advance to the next step
     if (LastLeg)  {  //The last leg in this step
         GaitStep = GaitStep+1;
         if (GaitStep>StepsInGait)
-              GaitStep = 1;
+            GaitStep = 1;
     }
 }  
 
@@ -872,13 +870,13 @@ void BalCalcOneLeg (short PosX, short PosZ, short PosY, byte BalLegNr)
     TotalTransY += (long)PosY;
     TotalTransZ += (long)CPR_Z;
     TotalTransX += (long)CPR_X;
-    
+
     lAtan = GetATan2(CPR_X, CPR_Z);
     TotalYBal1 += (lAtan*1800) / 31415;
-    
+
     lAtan = GetATan2 (CPR_X, CPR_Y);
     TotalZBal1 += ((lAtan*1800) / 31415) -900; //Rotate balance circle 90 deg
-    
+
     lAtan = GetATan2 (CPR_Z, CPR_Y);
     TotalXBal1 += ((lAtan*1800) / 31415) - 900; //Rotate balance circle 90 deg
 
@@ -895,13 +893,13 @@ void BalanceBody(void)
         TotalYBal1 -=  1800;
     else
         TotalYBal1 += 1800;
-    
+
     if (TotalZBal1 < -1800)    //Compensate for extreme balance positions that causes owerflow
         TotalZBal1 += 3600;
-    
+
     if (TotalXBal1 < -1800)    //Compensate for extreme balance positions that causes owerflow
         TotalXBal1 += 3600;
-    
+
     //Balance rotation
     TotalYBal1 = -TotalYBal1/BalanceDivFactor;
     TotalXBal1 = -TotalXBal1/BalanceDivFactor;
@@ -921,20 +919,20 @@ void GetSinCos(short AngleDeg1)
     if (AngleDeg1 < 0)
         ABSAngleDeg1 = AngleDeg1 *-1;
     else
-          ABSAngleDeg1 = AngleDeg1;
-    
+        ABSAngleDeg1 = AngleDeg1;
+
     //Shift rotation to a full circle of 360 deg -> AngleDeg // 360
     if (AngleDeg1 < 0)    //Negative values
         AngleDeg1 = 3600-(ABSAngleDeg1-(3600*(ABSAngleDeg1/3600)));
     else                //Positive values
         AngleDeg1 = ABSAngleDeg1-(3600*(ABSAngleDeg1/3600));
-    
+
     if (AngleDeg1>=0 && AngleDeg1<=900)     // 0 to 90 deg
     {
         sin4 = pgm_read_word(&GetSin[AngleDeg1/5]);             // 5 is the presision (0.5) of the table
         cos4 = pgm_read_word(&GetSin[(900-(AngleDeg1))/5]);
     }     
-        
+
     else if (AngleDeg1>900 && AngleDeg1<=1800)     // 90 to 180 deg
     {
         sin4 = pgm_read_word(&GetSin[(900-(AngleDeg1-900))/5]); // 5 is the presision (0.5) of the table    
@@ -969,10 +967,10 @@ long GetArcCos(short cos4)
     }
     else
         NegativeValue = 0;
-    
+
     //Limit cos4 to his maximal value
     cos4 = min(cos4,c4DEC);
-    
+
     if ((cos4>=0) && (cos4<9000))
     {
         AngleRad4 = (byte)pgm_read_byte(&GetACos[cos4/79]);
@@ -988,7 +986,7 @@ long GetArcCos(short cos4)
         AngleRad4 = (byte)pgm_read_byte(&GetACos[(cos4-9900)/2+227]);
         AngleRad4 = (long)((long)AngleRad4*616)/c1DEC;             //616=acos resolution (pi/2/255) 
     }
-       
+
     //Add negative sign
     if (NegativeValue)
         AngleRad4 = 31416 - AngleRad4;
@@ -998,27 +996,27 @@ long GetArcCos(short cos4)
 
 unsigned long isqrt32 (unsigned long n) //
 {
-        unsigned long root;
-        unsigned long remainder;
-        unsigned long  place;
+    unsigned long root;
+    unsigned long remainder;
+    unsigned long  place;
 
-        root = 0;
-        remainder = n;
-        place = 0x40000000; // OR place = 0x4000; OR place = 0x40; - respectively
+    root = 0;
+    remainder = n;
+    place = 0x40000000; // OR place = 0x4000; OR place = 0x40; - respectively
 
-        while (place > remainder)
+    while (place > remainder)
         place = place >> 2;
-        while (place)
+    while (place)
+    {
+        if (remainder >= root + place)
         {
-                if (remainder >= root + place)
-                {
-                        remainder = remainder - root - place;
-                        root = root + (place << 1);
-                }
-                root = root >> 1;
-                place = place >> 2;
+            remainder = remainder - root - place;
+            root = root + (place << 1);
         }
-        return root;
+        root = root >> 1;
+        place = place >> 2;
+    }
+    return root;
 }
 
 
@@ -1032,14 +1030,14 @@ short GetATan2 (short AtanX, short AtanY)
 {
     XYhyp2 = isqrt32(((long)AtanX*AtanX*c4DEC) + ((long)AtanY*AtanY*c4DEC));
     GetArcCos (((long)AtanX*(long)c6DEC) /(long) XYhyp2);
-    
+
     if (AtanY < 0)                // removed overhead... Atan4 = AngleRad4 * (AtanY/abs(AtanY));  
         Atan4 = -AngleRad4;
     else
         Atan4 = AngleRad4;
     return Atan4;
 }    
-    
+
 //--------------------------------------------------------------------
 //(BODY INVERSE KINEMATICS) 
 //BodyRotX         - Global Input pitch of the body 
@@ -1075,29 +1073,29 @@ void BodyFK (short PosX, short PosZ, short PosY, short RotationY, byte BodyIKLeg
     //Successive global rotation matrix: 
     //Math shorts for rotation: Alfa [A] = Xrotate, Beta [B] = Zrotate, Gamma [G] = Yrotate 
     //Sinus Alfa = SinA, cosinus Alfa = cosA. and so on... 
-    
+
     //First calculate sinus and cosinus for each rotation: 
     GetSinCos (g_InControlState.BodyRot1.x+TotalXBal1);
     SinG4 = sin4;
     CosG4 = cos4;
-    
+
     GetSinCos (g_InControlState.BodyRot1.z+TotalZBal1); 
     SinB4 = sin4;
     CosB4 = cos4;
-    
+
     GetSinCos (g_InControlState.BodyRot1.y+(RotationY*c1DEC)+TotalYBal1) ;
     SinA4 = sin4;
     CosA4 = cos4;
-    
+
     //Calcualtion of rotation matrix: 
-      BodyFKPosX = ((long)CPR_X*c2DEC - ((long)CPR_X*c2DEC*CosA4/c4DEC*CosB4/c4DEC - (long)CPR_Z*c2DEC*CosB4/c4DEC*SinA4/c4DEC 
-              + (long)CPR_Y*c2DEC*SinB4/c4DEC ))/c2DEC;
-      BodyFKPosZ = ((long)CPR_Z*c2DEC - ( (long)CPR_X*c2DEC*CosG4/c4DEC*SinA4/c4DEC + (long)CPR_X*c2DEC*CosA4/c4DEC*SinB4/c4DEC*SinG4/c4DEC 
-              + (long)CPR_Z*c2DEC*CosA4/c4DEC*CosG4/c4DEC - (long)CPR_Z*c2DEC*SinA4/c4DEC*SinB4/c4DEC*SinG4/c4DEC 
-              - (long)CPR_Y*c2DEC*CosB4/c4DEC*SinG4/c4DEC ))/c2DEC;
-      BodyFKPosY = ((long)CPR_Y  *c2DEC - ( (long)CPR_X*c2DEC*SinA4/c4DEC*SinG4/c4DEC - (long)CPR_X*c2DEC*CosA4/c4DEC*CosG4/c4DEC*SinB4/c4DEC 
-              + (long)CPR_Z*c2DEC*CosA4/c4DEC*SinG4/c4DEC + (long)CPR_Z*c2DEC*CosG4/c4DEC*SinA4/c4DEC*SinB4/c4DEC 
-              + (long)CPR_Y*c2DEC*CosB4/c4DEC*CosG4/c4DEC ))/c2DEC;
+    BodyFKPosX = ((long)CPR_X*c2DEC - ((long)CPR_X*c2DEC*CosA4/c4DEC*CosB4/c4DEC - (long)CPR_Z*c2DEC*CosB4/c4DEC*SinA4/c4DEC 
+                + (long)CPR_Y*c2DEC*SinB4/c4DEC ))/c2DEC;
+    BodyFKPosZ = ((long)CPR_Z*c2DEC - ( (long)CPR_X*c2DEC*CosG4/c4DEC*SinA4/c4DEC + (long)CPR_X*c2DEC*CosA4/c4DEC*SinB4/c4DEC*SinG4/c4DEC 
+                + (long)CPR_Z*c2DEC*CosA4/c4DEC*CosG4/c4DEC - (long)CPR_Z*c2DEC*SinA4/c4DEC*SinB4/c4DEC*SinG4/c4DEC 
+                - (long)CPR_Y*c2DEC*CosB4/c4DEC*SinG4/c4DEC ))/c2DEC;
+    BodyFKPosY = ((long)CPR_Y  *c2DEC - ( (long)CPR_X*c2DEC*SinA4/c4DEC*SinG4/c4DEC - (long)CPR_X*c2DEC*CosA4/c4DEC*CosG4/c4DEC*SinB4/c4DEC 
+                + (long)CPR_Z*c2DEC*CosA4/c4DEC*SinG4/c4DEC + (long)CPR_Z*c2DEC*CosG4/c4DEC*SinA4/c4DEC*SinB4/c4DEC 
+                + (long)CPR_Y*c2DEC*CosB4/c4DEC*CosG4/c4DEC ))/c2DEC;
 }  
 
 
@@ -1121,7 +1119,7 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
     unsigned long    IKA24;            //Angle of the line S>W with respect to the femur in radians, decimals = 4
     short            IKFeetPosXZ;    //Diagonal direction from Input X and Z
 #ifdef c4DOF
-// these were shorts...
+    // these were shorts...
     long            TarsOffsetXZ;    //Vector value \ ;
     long            TarsOffsetY;     //Vector value / The 2 DOF IK calcs (femur and tibia) are based upon these vectors
     long            TarsToGroundAngle1;    //Angle between tars and ground. Note: the angle are 0 when the tars are perpendicular to the ground
@@ -1136,11 +1134,11 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
     long            Temp1;            
     long            Temp2;            
     long            T3;
-    
+
     //Calculate IKCoxaAngle and IKFeetPosXZ
     GetATan2 (IKFeetPosX, IKFeetPosZ);
     CoxaAngle1[LegIKLegNr] = (((long)Atan4*180) / 3141) + (short)pgm_read_word(&cCoxaAngle1[LegIKLegNr]);
-    
+
     //Length between the Coxa and tars [foot]
     IKFeetPosXZ = XYhyp2/c2DEC;
 #ifdef c4DOF
@@ -1166,7 +1164,7 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
             TarsToGroundAngle1 = (TGA_A_H4 -(((long)IKFeetPosY*(TGA_B_H3-TGA_A_H4))/c1DEC));
         else                //IKFeetPosY <= -10, Only compensate TGA1 when it exceed 40 deg
             TarsToGroundAngle1 = TGA_B_H3;
-		
+
         //Calc Tars Offsets:
         GetSinCos(TarsToGroundAngle1);
         TarsOffsetXZ = ((long)sin4*(byte)pgm_read_byte(&cTarsLength[LegIKLegNr]))/c4DEC;
@@ -1176,14 +1174,14 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
         TarsOffsetY = 0;
     }
 #endif
-    
+
     //Using GetAtan2 for solving IKA1 and IKSW
     //IKA14 - Angle between SW line and the ground in radians
     IKA14 = GetATan2 (IKFeetPosY-TarsOffsetY, IKFeetPosXZ-(byte)pgm_read_byte(&cCoxaLength[LegIKLegNr])-TarsOffsetXZ);
-    
+
     //IKSW2 - Length between femur axis and tars
     IKSW2 = XYhyp2;
-    
+
     //IKA2 - Angle of the line S>W with respect to the femur in radians
     Temp1 = ((((long)(byte)pgm_read_byte(&cFemurLength[LegIKLegNr])*(byte)pgm_read_byte(&cFemurLength[LegIKLegNr])) - ((long)(byte)pgm_read_byte(&cTibiaLength[LegIKLegNr])*(byte)pgm_read_byte(&cTibiaLength[LegIKLegNr])))*c4DEC + ((long)IKSW2*IKSW2));
     Temp2 = (long)(2*(byte)pgm_read_byte(&cFemurLength[LegIKLegNr]))*c2DEC * (unsigned long)IKSW2;
@@ -1202,12 +1200,12 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
     //Tars angle
     if ((byte)pgm_read_byte(&cTarsLength[LegIKLegNr])) {    // We allow mix of 3 and 4 DOF legs...
         TarsAngle1[LegIKLegNr] = (TarsToGroundAngle1 + FemurAngle1[LegIKLegNr] - TibiaAngle1[LegIKLegNr]) 
-             + CTARSHORNOFFSET1(LegIKLegNr);
+            + CTARSHORNOFFSET1(LegIKLegNr);
     }
 #endif
 
     //Set the Solution quality    
-    if(IKSW2 < ((byte)pgm_read_byte(&cFemurLength[LegIKLegNr])+(byte)pgm_read_byte(&cTibiaLength[LegIKLegNr])-30)*c2DEC)
+    if(IKSW2 < (unsigned long)((byte)pgm_read_byte(&cFemurLength[LegIKLegNr])+(byte)pgm_read_byte(&cTibiaLength[LegIKLegNr])-30)*c2DEC)
         IKSolution = 1;
     else
     {
@@ -1228,11 +1226,11 @@ void CheckAngles(void)
     for (LegIndex = 0; LegIndex <=5; LegIndex++)
     {
         CoxaAngle1[LegIndex]  = min(max(CoxaAngle1[LegIndex], (short)pgm_read_word(&cCoxaMin1[LegIndex])), 
-                    (short)pgm_read_word(&cCoxaMax1[LegIndex]));
+                (short)pgm_read_word(&cCoxaMax1[LegIndex]));
         FemurAngle1[LegIndex] = min(max(FemurAngle1[LegIndex], (short)pgm_read_word(&cFemurMin1[LegIndex])),
-                    (short)pgm_read_word(&cFemurMax1[LegIndex]));
+                (short)pgm_read_word(&cFemurMax1[LegIndex]));
         TibiaAngle1[LegIndex] = min(max(TibiaAngle1[LegIndex], (short)pgm_read_word(&cTibiaMin1[LegIndex])),
-                    (short)pgm_read_word(&cTibiaMax1[LegIndex]));
+                (short)pgm_read_word(&cTibiaMax1[LegIndex]));
 #ifdef c4DOF
         if ((byte)pgm_read_byte(&cTarsLength[LegIndex])) {    // We allow mix of 3 and 4 DOF legs...
             TarsAngle1[LegIndex] = min(max(TarsAngle1[LegIndex], (short)pgm_read_word(&cTarsMin1[LegIndex])),
@@ -1270,21 +1268,21 @@ void SoundNoTimer(uint8_t _pin, unsigned long duration,  unsigned int frequency)
 #endif
     long toggle_count = 0;
     long lusDelayPerHalfCycle;
-    
+
     // Set the pinMode as OUTPUT
     pinMode(_pin, OUTPUT);
 
     pin_port = portOutputRegister(digitalPinToPort(_pin));
     pin_mask = digitalPinToBitMask(_pin);
-    
+
     toggle_count = 2 * frequency * duration / 1000;
     lusDelayPerHalfCycle = 1000000L/(frequency * 2);
-    
+
     // if we are using an 8 bit timer, scan through prescalars to find the best fit
     while (toggle_count--) {
         // toggle the pin
         *pin_port ^= pin_mask;
-        
+
         // delay a half cycle
         delayMicroseconds(lusDelayPerHalfCycle);
     }    
@@ -1330,23 +1328,23 @@ boolean TerminalMonitor(void)
 #endif        
         g_fShowDebugPrompt = false;
     }
-       
+
     // First check to see if there is any characters to process.
-    if (ich = DBGSerial.available()) {
+    if ((ich = DBGSerial.available())) {
         ich = 0;
         // For now assume we receive a packet of data from serial monitor, as the user has
         // to click the send button...
-        for (ich=0; ich < sizeof(szCmdLine); ich++) {
+        for (ich=0; ich < (int)sizeof(szCmdLine); ich++) {
             ch = DBGSerial.read();        // get the next character
             if ((ch == -1) || ((ch >= 10) && (ch <= 15)))
                 break;
-             szCmdLine[ich] = ch;
+            szCmdLine[ich] = ch;
         }
         szCmdLine[ich] = '\0';    // go ahead and null terminate it...
         DBGSerial.print("Serial Cmd Line:");        
         DBGSerial.write(szCmdLine, ich);
         DBGSerial.println("!!!");
-        
+
         // So see what are command is.
         if (ich == 0) {
             g_fShowDebugPrompt = true;
@@ -1365,7 +1363,7 @@ boolean TerminalMonitor(void)
             g_ServoDriver.SSCForwarder();
 #endif
         }
-        
+
         return true;
     }
     return false;
@@ -1381,12 +1379,10 @@ short SmoothControl (short CtrlMoveInp, short CtrlMoveOut, byte CtrlDivider)
     if (fWalking)
     {
         if (CtrlMoveOut < (CtrlMoveInp - 4))
-              return CtrlMoveOut + abs((CtrlMoveOut - CtrlMoveInp)/CtrlDivider);
+            return CtrlMoveOut + abs((CtrlMoveOut - CtrlMoveInp)/CtrlDivider);
         else if (CtrlMoveOut > (CtrlMoveInp + 4))
-              return CtrlMoveOut - abs((CtrlMoveOut - CtrlMoveInp)/CtrlDivider);
+            return CtrlMoveOut - abs((CtrlMoveOut - CtrlMoveInp)/CtrlDivider);
     }
 
     return CtrlMoveInp;
 }
-
-

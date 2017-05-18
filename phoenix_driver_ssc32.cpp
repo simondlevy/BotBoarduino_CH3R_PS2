@@ -35,7 +35,7 @@ const byte cTarsPin[] PROGMEM = {cRRTarsPin, cRMTarsPin, cRFTarsPin, cLRTarsPin,
 #if cSSC_IN == 0
 #define SSCSerial Serial
 #else
-    SoftwareSerial SSCSerial(cSSC_IN, cSSC_OUT);
+SoftwareSerial SSCSerial(cSSC_IN, cSSC_OUT);
 #endif    
 #endif
 #endif
@@ -53,7 +53,7 @@ extern int SSCRead (byte* pb, int cb, word wTimeout, word wEOL);
 //--------------------------------------------------------------------
 void ServoDriver::Init(void) {
     SSCSerial.begin(cSSC_BAUD);
-    
+
     // Lets do the check for GP Enabled here...
 #ifdef OPT_GPPLAYER
     char abVer[40];        // give a nice large buffer.
@@ -61,7 +61,7 @@ void ServoDriver::Init(void) {
 
     _fGPEnabled = false;  // starts off assuming that it is not enabled...
     _fGPActive = false;
-    
+
 #ifdef __AVR__
 #if not defined(UBRR1H)
 #if cSSC_IN != 0
@@ -71,7 +71,7 @@ void ServoDriver::Init(void) {
 #endif
     SSCSerial.print("ver\r");
     cbRead = SSCRead((byte*)abVer, sizeof(abVer), 10000, 13);
-    
+
 #ifdef DBGSerial
     DBGSerial.write("Check GP Enable: ");
     if (cbRead > 0) {
@@ -83,9 +83,9 @@ void ServoDriver::Init(void) {
     DBGSerial.print("\n\r");
 #endif        
     if ((cbRead > 3) && (abVer[cbRead-3]=='G') && (abVer[cbRead-2]=='P') && (abVer[cbRead-1]==13))
-      _fGPEnabled = true;  // starts off assuming that it is not enabled...
+        _fGPEnabled = true;  // starts off assuming that it is not enabled...
     else
-      MSound (SOUND_PIN, 2, 40, 2500, 40, 2500);
+        MSound (SOUND_PIN, 2, 40, 2500, 40, 2500);
 #endif
 }
 
@@ -100,15 +100,15 @@ void ServoDriver::Init(void) {
 boolean ServoDriver::FIsGPSeqDefined(uint8_t iSeq)
 {
     word wGPSeqPtr;
-    
+
     // See if we can see if this sequence is defined
     SSCSerial.print("EER -");
     SSCSerial.print(iSeq*2, DEC);
     SSCSerial.println(";2");
     if ((SSCRead((byte*)&wGPSeqPtr, sizeof(wGPSeqPtr), 1000, 0xffff) == sizeof(wGPSeqPtr)) && (wGPSeqPtr != 0)  && (wGPSeqPtr != 0xffff)) {
-      return true;
+        return true;
     }
-  return false;  // nope return error
+    return false;  // nope return error
 }
 
 
@@ -128,18 +128,18 @@ void ServoDriver::GPPlayer(void)
 {
     byte abStat[4];
     byte cbRead;
-    
+
     // BUGBUG:: Should integrate in the newer stuff to all us to control the speed of a sequence.
     //Start sequence
     if (_fGPActive) {
         g_InputController.AllowControllerInterrupts(false);    // If on xbee on hserial tell hserial to not processess...
-        
+
         SSCSerial.print("PL0SQ");
         SSCSerial.print(_iSeq, DEC);
         SSCSerial.println("ONCE"); //Start sequence
         delay(20);
         SSCSerial.flush();        // get rid of anything that was previously queued up...
-    
+
         //Wait for GPPlayer to complete sequence    
         do {
             SSCSerial.print("QPL0\r");
@@ -168,8 +168,8 @@ void ServoDriver::BeginServoUpdate(void)    // Start the update
 //------------------------------------------------------------------------------------------
 #define cPwmDiv       991  //old 1059;
 #define cPFConst      592  //old 650 ; 900*(1000/cPwmDiv)+cPFConst must always be 1500
-                           // A PWM/deg factor of 10,09 give cPwmDiv = 991 and cPFConst = 592
-                           // For a modified 5645 (to 180 deg travel): cPwmDiv = 1500 and cPFConst = 900.
+// A PWM/deg factor of 10,09 give cPwmDiv = 991 and cPFConst = 592
+// For a modified 5645 (to 180 deg travel): cPwmDiv = 1500 and cPFConst = 900.
 #ifdef c4DOF
 void ServoDriver::OutputServoInfoForLeg(byte LegIndex, short sCoxaAngle1, short sFemurAngle1, short sTibiaAngle1, short sTarsAngle1)
 #else
@@ -255,7 +255,7 @@ void ServoDriver::CommitServoDriver(word wMoveTime)
 #ifdef cSSC_BINARYMODE
     byte    abOut[3];
 #endif
-    
+
     g_InputController.AllowControllerInterrupts(false);    // If on xbee on hserial tell hserial to not processess...
 
 #ifdef cSSC_BINARYMODE
@@ -264,7 +264,7 @@ void ServoDriver::CommitServoDriver(word wMoveTime)
     abOut[2] = wMoveTime & 0xff;
     SSCSerial.write(abOut, 3);
 #else
-      //Send <CR>
+    //Send <CR>
     SSCSerial.print("T");
     SSCSerial.println(wMoveTime, DEC);
 #endif
@@ -299,9 +299,9 @@ void  ServoDriver::SSCForwarder(void)
     MSound(SOUND_PIN, 1, 1000, 2000);  //sound SOUND_PIN, [50\4000]
     delay(2000);
     int sChar;
-    int sPrevChar;
+    int sPrevChar = 0;
     DBGSerial.println("SSC Forwarder mode - Enter $<cr> to exit");
-    
+
     while(digitalRead(PS2_CMD)) {
         if ((sChar = DBGSerial.read()) != -1) {
             SSCSerial.write(sChar & 0xff);
@@ -309,7 +309,7 @@ void  ServoDriver::SSCForwarder(void)
                 break;    // exit out of the loop
             sPrevChar = sChar;
         }
-        
+
 
         if ((sChar = SSCSerial.read()) != -1) {
             DBGSerial.write(sChar & 0xff);
@@ -362,7 +362,7 @@ void ServoDriver::FindServoOffsets()
     byte abSSCServoNum[NUMSERVOSPERLEG*6];           // array of servos...
     signed char asOffsets[NUMSERVOSPERLEG*6];        // we have 18 servos to find/set offsets for...
     signed char asOffsetsRead[NUMSERVOSPERLEG*6];    // array for our read in servos...
-    
+
     static const char *apszLegs[] = {"RR","RM","RF", "LR", "LM", "LF"};  // Leg Order
     static const char *apszLJoints[] = {" Coxa", " Femur", " Tibia", " tArs"}; // which joint on the leg...
 
@@ -373,8 +373,7 @@ void ServoDriver::FindServoOffsets()
     short sSN ; 			// which servo number
     boolean fNew = true;	// is this a new servo to work with?
     boolean fExit = false;	// when to exit
-    int ich;
-    
+
     if (CheckVoltage()) {
         // Voltage is low... 
         Serial.println("Low Voltage: fix or hit $ to abort");
@@ -382,38 +381,38 @@ void ServoDriver::FindServoOffsets()
             if (Serial.read() == '$')  return;
         }
     }
-      
+
     // Fill in array of SSC-32 servo numbers    
     for (sSN=0; sSN < 6; sSN++) {   // Make sure all of our servos initialize to 0 offset from saved.
-      abSSCServoNum[sSN*NUMSERVOSPERLEG + 0] = pgm_read_byte(&cCoxaPin[sSN]);
-      abSSCServoNum[sSN*NUMSERVOSPERLEG + 1] = pgm_read_byte(&cFemurPin[sSN]);
-      abSSCServoNum[sSN*NUMSERVOSPERLEG + 2] = pgm_read_byte(&cTibiaPin[sSN]);
+        abSSCServoNum[sSN*NUMSERVOSPERLEG + 0] = pgm_read_byte(&cCoxaPin[sSN]);
+        abSSCServoNum[sSN*NUMSERVOSPERLEG + 1] = pgm_read_byte(&cFemurPin[sSN]);
+        abSSCServoNum[sSN*NUMSERVOSPERLEG + 2] = pgm_read_byte(&cTibiaPin[sSN]);
 #ifdef c4DOF
-      abSSCServoNum[sSN*NUMSERVOSPERLEG + 3] = pgm_read_byte(&cTarsPin[sSN]);
+        abSSCServoNum[sSN*NUMSERVOSPERLEG + 3] = pgm_read_byte(&cTarsPin[sSN]);
 #endif
     }
     // now lets loop through and get information and set servos to 1500
     for (sSN=0; sSN < 6*NUMSERVOSPERLEG; sSN++ ) {
-      asOffsets[sSN] = 0;       
-      asOffsetsRead[sSN] = 0; 
-      
-      SSCSerial.print("R");
-      SSCSerial.println(32+abSSCServoNum[sSN], DEC);
-      // now read in the current value...  Maybe should use atoi...
-      cbRead = SSCRead((byte*)szTemp, sizeof(szTemp), 10000, 13);
-      if (cbRead > 0)
-        asOffsetsRead[sSN] = atoi((const char *)szTemp);
+        asOffsets[sSN] = 0;       
+        asOffsetsRead[sSN] = 0; 
 
-      SSCSerial.print("#");
-      SSCSerial.print(abSSCServoNum[sSN], DEC);
-      SSCSerial.println("P1500");
+        SSCSerial.print("R");
+        SSCSerial.println(32+abSSCServoNum[sSN], DEC);
+        // now read in the current value...  Maybe should use atoi...
+        cbRead = SSCRead((byte*)szTemp, sizeof(szTemp), 10000, 13);
+        if (cbRead > 0)
+            asOffsetsRead[sSN] = atoi((const char *)szTemp);
+
+        SSCSerial.print("#");
+        SSCSerial.print(abSSCServoNum[sSN], DEC);
+        SSCSerial.println("P1500");
     }
-        
+
     // OK lets move all of the servos to their zero point.
     Serial.println("Find Servo Zeros.\n$-Exit, +- changes, *-change servo");
     Serial.println("    0-5 Chooses a leg, C-Coxa, F-Femur, T-Tibia");
 
-  sSN = true;
+    sSN = true;
     while(!fExit) {
         if (fNew) {
             Serial.print("Servo: ");
@@ -423,7 +422,7 @@ void ServoDriver::FindServoOffsets()
             Serial.print(asOffsetsRead[sSN]+asOffsets[sSN], DEC);
             Serial.println(")");
 
-	    // Now lets wiggle the servo
+            // Now lets wiggle the servo
             SSCSerial.print("#");
             SSCSerial.print(abSSCServoNum[sSN], DEC);
             SSCSerial.print("P");
@@ -447,50 +446,50 @@ void ServoDriver::FindServoOffsets()
 
             fNew = false;
         }
-	
-	//get user entered data
-	data = Serial.read();
-	//if data received
-	if (data !=-1) 	{
+
+        //get user entered data
+        data = Serial.read();
+        //if data received
+        if (data !=-1) 	{
             if (data == '$')
-		fExit = true;	// not sure how the keypad will map so give NL, CR, LF... all implies exit
+                fExit = true;	// not sure how the keypad will map so give NL, CR, LF... all implies exit
 
-	    else if ((data == '+') || (data == '-')) {
-	        if (data == '+')
-		    asOffsets[sSN] += 5;		// increment by 5us
-		else
-		    asOffsets[sSN] -= 5;		// increment by 5us
+            else if ((data == '+') || (data == '-')) {
+                if (data == '+')
+                    asOffsets[sSN] += 5;		// increment by 5us
+                else
+                    asOffsets[sSN] -= 5;		// increment by 5us
 
-		Serial.print("    ");
+                Serial.print("    ");
                 Serial.println(asOffsetsRead[sSN]+asOffsets[sSN], DEC);
-                
+
                 SSCSerial.print("#");
                 SSCSerial.print(abSSCServoNum[sSN], DEC);
                 SSCSerial.print("P");
                 SSCSerial.print(1500+asOffsets[sSN], DEC);
                 SSCSerial.println("T100");
-  	    } else if ((data >= '0') && (data <= '5')) {
-		// direct enter of which servo to change
-		fNew = true;
-		sSN = (sSN % NUMSERVOSPERLEG) + (data - '0')*NUMSERVOSPERLEG;
-	    } else if ((data == 'c') && (data == 'C')) {
-		fNew = true;
-		sSN = (sSN / NUMSERVOSPERLEG) * NUMSERVOSPERLEG + 0;
-	    } else if ((data == 'c') && (data == 'C')) {
-		fNew = true;
-		sSN = (sSN / NUMSERVOSPERLEG) * NUMSERVOSPERLEG + 1;
-	    } else if ((data == 'c') && (data == 'C')) {
-		// direct enter of which servo to change
-		fNew = true;
-		sSN = (sSN / NUMSERVOSPERLEG) * NUMSERVOSPERLEG + 2;
-	    } else if (data == '*') {
-	        // direct enter of which servo to change
-		fNew = true;
-		sSN++;
-		if (sSN == 6*NUMSERVOSPERLEG) 
-		    sSN = 0;	
-	    }
-	}
+            } else if ((data >= '0') && (data <= '5')) {
+                // direct enter of which servo to change
+                fNew = true;
+                sSN = (sSN % NUMSERVOSPERLEG) + (data - '0')*NUMSERVOSPERLEG;
+            } else if ((data == 'c') && (data == 'C')) {
+                fNew = true;
+                sSN = (sSN / NUMSERVOSPERLEG) * NUMSERVOSPERLEG + 0;
+            } else if ((data == 'c') && (data == 'C')) {
+                fNew = true;
+                sSN = (sSN / NUMSERVOSPERLEG) * NUMSERVOSPERLEG + 1;
+            } else if ((data == 'c') && (data == 'C')) {
+                // direct enter of which servo to change
+                fNew = true;
+                sSN = (sSN / NUMSERVOSPERLEG) * NUMSERVOSPERLEG + 2;
+            } else if (data == '*') {
+                // direct enter of which servo to change
+                fNew = true;
+                sSN++;
+                if (sSN == 6*NUMSERVOSPERLEG) 
+                    sSN = 0;	
+            }
+        }
     }
     Serial.print("Find Servo exit ");
     for (sSN=0; sSN < 6*NUMSERVOSPERLEG; sSN++){
@@ -506,22 +505,22 @@ void ServoDriver::FindServoOffsets()
 
     //get user entered data
     while (((data = Serial.read()) == -1) || ((data >= 10) && (data <= 15)))
-	; 
+        ; 
 
     if ((data == 'Y') || (data == 'y')) {
         // Ok they asked for the data to be saved.  We will store the data with a 
         // number of servos (byte)at the start, followed by a byte for a checksum...followed by our offsets array...
         // Currently we store these values starting at EEPROM address 0. May later change...
-	// 
+        // 
 
         for (sSN=0; sSN < 6*NUMSERVOSPERLEG; sSN++ ) {
-          SSCSerial.print("R");
-          SSCSerial.print(32+abSSCServoNum[sSN], DEC);
-          SSCSerial.print("=");
-          SSCSerial.println(asOffsetsRead[sSN]+asOffsets[sSN], DEC);
-          delay(10);
+            SSCSerial.print("R");
+            SSCSerial.print(32+abSSCServoNum[sSN], DEC);
+            SSCSerial.print("=");
+            SSCSerial.println(asOffsetsRead[sSN]+asOffsets[sSN], DEC);
+            delay(10);
         }
-        
+
         // Then I need to have the SSC-32 reboot in order to use the new values.
         delay(10);    // give it some time to write stuff out.
         SSCSerial.println("GOBOOT");
@@ -532,7 +531,7 @@ void ServoDriver::FindServoOffsets()
     } else {
         void LoadServosConfig();
     }
-    
+
     FreeServos();
 
 }

@@ -72,31 +72,31 @@
 //--------------------------------------------------------------------
 //[Botboarduino Pin Numbers]
 #ifdef __BOTBOARDUINO__
-  #define SOUND_PIN       5   // Botboarduino JR pin number
-  #define PS2_DAT         8        
-  #define PS2_CMD         7
-  #define PS2_SEL         6  // On the PS2 receiver this pin may be called ATT (attention)
-  #define PS2_CLK         9
+#define SOUND_PIN       5   // Botboarduino JR pin number
+#define PS2_DAT         8        
+#define PS2_CMD         7
+#define PS2_SEL         6  // On the PS2 receiver this pin may be called ATT (attention)
+#define PS2_CLK         9
 // If we are using a SSC-32 then:
 // If were are running on an Arduino Mega we will use one of the hardware serial port, default to Serial1 above.
 // If on Non mega, if the IO pins are set to 0, we will overload the hardware Serial port 
 // Else we will user SoftwareSerial to talk to the SSC-32
-  #define cSSC_OUT       12   //Output pin for Botboard - Input of SSC32 (Yellow)
-  #define cSSC_IN        13   //Input pin for Botboard - Output of SSC32 (Blue)
+#define cSSC_OUT       12   //Output pin for Botboard - Input of SSC32 (Yellow)
+#define cSSC_IN        13   //Input pin for Botboard - Output of SSC32 (Blue)
 #endif
 
 #ifdef __BOTBOARD_ARDUINOPROMINI__
-  #define SOUND_PIN      11   // Bot Board JR pin number (with Arduino Pro Mini plugged)
-  #define PS2_DAT        14       
-  #define PS2_CMD        15
-  #define PS2_SEL        16
-  #define PS2_CLK        17
+#define SOUND_PIN      11   // Bot Board JR pin number (with Arduino Pro Mini plugged)
+#define PS2_DAT        14       
+#define PS2_CMD        15
+#define PS2_SEL        16
+#define PS2_CLK        17
 // If we are using a SSC-32 then:
 // If were are running on an Arduino Mega we will use one of the hardware serial port, default to Serial1 above.
 // If on Non mega, if the IO pins are set to 0, we will overload the hardware Serial port 
 // Else we will user SoftwareSerial to talk to the SSC-32
-  #define cSSC_OUT       10   //Output pin for Botboard - Input of SSC32 (Yellow)
-  #define cSSC_IN         9   //Input pin for Botboard - Output of SSC32 (Blue)
+#define cSSC_OUT       10   //Output pin for Botboard - Input of SSC32 (Yellow)
+#define cSSC_IN         9   //Input pin for Botboard - Output of SSC32 (Blue)
 #endif
 
 //====================================================================

@@ -117,10 +117,7 @@ extern void PS2TurnRobotOff(void);
 // If both PS2 and XBee are defined then we will become secondary to the xbee
 void InputController::Init(void)
 {
-    int error;
-
-    //error = ps2x.config_gamepad(57, 55, 56, 54);  // Setup gamepad (clock, command, attention, data) pins
-    error = ps2x.config_gamepad(PS2_CLK, PS2_CMD, PS2_SEL, PS2_DAT);  // Setup gamepad (clock, command, attention, data) pins
+    ps2x.config_gamepad(PS2_CLK, PS2_CMD, PS2_SEL, PS2_DAT);  // Setup gamepad (clock, command, attention, data) pins
 
     g_BodyYOffset = 65;  // 0 - Devon wanted...
     g_BodyYShift = 0;
@@ -141,7 +138,8 @@ void InputController::Init(void)
 //==============================================================================
 void InputController::AllowControllerInterrupts(boolean fAllow)
 {
-// We don't need to do anything...
+    // We don't need to do anything...
+    (void)fAllow;
 }
 
 //==============================================================================
@@ -158,7 +156,7 @@ void InputController::ControlInput(void)
     if ((ps2x.Analog(1) & 0xf0) == 0x70) {
         // In an analog mode so should be OK...
         g_sPS2ErrorCnt = 0;    // clear out error count...
-        
+
         if (ps2x.ButtonPressed(PSB_START)) {// OK lets try "0" button for Start. 
             if (g_InControlState.fHexOn) {
                 PS2TurnRobotOff();
@@ -170,8 +168,8 @@ void InputController::ControlInput(void)
 
         if (g_InControlState.fHexOn) {
             // [SWITCH MODES]
-    
-             //Translate mode
+
+            //Translate mode
             if (ps2x.ButtonPressed(PSB_L1)) {// L1 Button Test
                 MSound(SOUND_PIN, 1, 50, 2000);  //sound SOUND_PIN, [50\4000]
                 if (ControlMode != TRANSLATEMODE )
@@ -183,7 +181,7 @@ void InputController::ControlInput(void)
                         ControlMode = SINGLELEGMODE;
                 }
             }
-  
+
             //Rotate mode
             if (ps2x.ButtonPressed(PSB_L2)) {    // L2 Button Test
                 MSound(SOUND_PIN, 1, 50, 2000);  //sound SOUND_PIN, [50\4000]
@@ -196,7 +194,7 @@ void InputController::ControlInput(void)
                         ControlMode = SINGLELEGMODE;
                 }
             }
-    
+
             //Single leg mode fNO
             if (ps2x.ButtonPressed(PSB_CIRCLE)) {// O - Circle Button Test
                 if (abs(g_InControlState.TravelLength.x)<cTravelDeadZone && abs(g_InControlState.TravelLength.z)<cTravelDeadZone 
@@ -204,8 +202,8 @@ void InputController::ControlInput(void)
                     //Sound SOUND_PIN,[50\4000]
                     if (ControlMode != SINGLELEGMODE) {
                         ControlMode = SINGLELEGMODE;
-                            if (g_InControlState.SelectedLeg == 255)  //Select leg if none is selected
-                                g_InControlState.SelectedLeg=cRF; //Startleg
+                        if (g_InControlState.SelectedLeg == 255)  //Select leg if none is selected
+                            g_InControlState.SelectedLeg=cRF; //Startleg
                     } else {
                         ControlMode = WALKMODE;
                         g_InControlState.SelectedLeg=255;
@@ -280,7 +278,7 @@ void InputController::ControlInput(void)
                     }
                     GaitSelect();
                 }
-  
+
                 //Double leg lift height
                 if (ps2x.ButtonPressed(PSB_R1)) { // R1 Button Test
                     MSound(SOUND_PIN, 1, 50, 2000);  //sound SOUND_PIN, [50\4000]
@@ -290,19 +288,19 @@ void InputController::ControlInput(void)
                     else
                         g_InControlState.LegLiftHeight = 50;
                 }
-  
+
                 //Double Travel Length
                 if (ps2x.ButtonPressed(PSB_R2)) {// R2 Button Test
                     MSound (SOUND_PIN, 1, 50, 2000);  //sound SOUND_PIN, [50\4000]
                     DoubleTravelOn = !DoubleTravelOn;
                 }
-  
+
                 // Switch between Walk method 1 && Walk method 2
                 if (ps2x.ButtonPressed(PSB_R3)) { // R3 Button Test
                     MSound (SOUND_PIN, 1, 50, 2000);  //sound SOUND_PIN, [50\4000]
                     WalkMethod = !WalkMethod;
                 }
-  
+
                 //Walking
                 if (WalkMethod)  //(Walk Methode) 
                     g_InControlState.TravelLength.z = (ps2x.Analog(PSS_RY)-128); //Right Stick Up/Down  
@@ -384,17 +382,17 @@ void InputController::ControlInput(void)
             //Calculate walking time delay
             g_InControlState.InputTimeDelay = 128 - max(max(abs(ps2x.Analog(PSS_LX) - 128), abs(ps2x.Analog(PSS_LY) - 128)), abs(ps2x.Analog(PSS_RX) - 128));
         }
-  
+
         //Calculate g_InControlState.BodyPos.y
         g_InControlState.BodyPos.y = max(g_BodyYOffset + g_BodyYShift,  0);
     } else {
-      // We may have lost the PS2... See what we can do to recover...
-      if (g_sPS2ErrorCnt < MAXPS2ERRORCNT)
-          g_sPS2ErrorCnt++;    // Increment the error count and if to many errors, turn off the robot.
-      else if (g_InControlState.fHexOn)
-          PS2TurnRobotOff();
-       //This line is only required for use with older version of the PS2 library.
-       //ps2x.reconfig_gamepad();
+        // We may have lost the PS2... See what we can do to recover...
+        if (g_sPS2ErrorCnt < MAXPS2ERRORCNT)
+            g_sPS2ErrorCnt++;    // Increment the error count and if to many errors, turn off the robot.
+        else if (g_InControlState.fHexOn)
+            PS2TurnRobotOff();
+        //This line is only required for use with older version of the PS2 library.
+        //ps2x.reconfig_gamepad();
     }
 }
 
@@ -403,7 +401,7 @@ void InputController::ControlInput(void)
 //==============================================================================
 void PS2TurnRobotOff(void)
 {
-   //Turn off
+    //Turn off
     g_InControlState.BodyPos.x = 0;
     g_InControlState.BodyPos.y = 0;
     g_InControlState.BodyPos.z = 0;
