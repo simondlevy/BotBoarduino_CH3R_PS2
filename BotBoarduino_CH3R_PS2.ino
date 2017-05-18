@@ -552,7 +552,6 @@ void loop(void)
         g_InControlState.fPrev_HexOn = 0;
 
     // Test the beeper
-    /*
     static unsigned long proximityStartMillis;
     if (proximityStartMillis > 0) {
       if (millis() - proximityStartMillis > 1000) { // every 1000 msec
@@ -565,7 +564,6 @@ void loop(void)
     else {
       proximityStartMillis = millis();
     }
-    */
 }
 
 
