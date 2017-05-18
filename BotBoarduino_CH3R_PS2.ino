@@ -30,6 +30,10 @@
 #include "Hex_Globals.h"
 #define BalanceDivFactor 6    //;Other values than 6 can be used, testing...CAUTION!! At your own risk ;)
 
+// For our sonar/beeper hack
+#include <Wire.h>
+#include <MB1242.h>
+
 //--------------------------------------------------------------------
 //[TABLES]
 //ArcCosinus Table
@@ -289,6 +293,8 @@ extern void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte Le
 extern void Gait (byte GaitCurrentLegNr);
 extern short GetATan2 (short AtanX, short AtanY);
 
+MB1242 sonar;
+
 
 //--------------------------------------------------------------------------
 // SETUP: the main arduino setup function.
@@ -358,6 +364,11 @@ void setup(){
     ServoMoveTime = 150;
     g_InControlState.fHexOn = 0;
     g_fLowVoltageShutdown = false;
+
+    // MB1242 sonar
+    Wire.begin(); // launch I^2C   
+    delay(100);
+    sonar.begin();
 }
 
 
@@ -539,6 +550,22 @@ void loop(void)
         g_InControlState.fPrev_HexOn = 1;
     else
         g_InControlState.fPrev_HexOn = 0;
+
+    // Test the beeper
+    /*
+    static unsigned long proximityStartMillis;
+    if (proximityStartMillis > 0) {
+      if (millis() - proximityStartMillis > 1000) { // every 1000 msec
+        if (sonar.getDistance() < 100) {            // sonar less than 100cm from obstacle
+          MSound(SOUND_PIN, 3, 60, 2000, 80, 2250, 100, 2500);
+          proximityStartMillis = millis();
+        }
+      }
+    } 
+    else {
+      proximityStartMillis = millis();
+    }
+    */
 }
 
 
@@ -1312,7 +1339,7 @@ void MSound(uint8_t _pin, byte cNotes, ...)
 //    us to do anything, like update debug levels ore the like.
 //==============================================================================
 boolean TerminalMonitor(void)
-{
+{  
     byte szCmdLine[5];  // currently pretty simple command lines...
     int ich;
     int ch;
