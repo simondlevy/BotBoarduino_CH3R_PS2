@@ -555,8 +555,11 @@ void loop(void)
     static unsigned long proximityStartMillis;
     if (proximityStartMillis > 0) {
       if (millis() - proximityStartMillis > 1000) { // every 1000 msec
-        if (sonar.getDistance() < 100) {            // sonar less than 100cm from obstacle
-          MSound(SOUND_PIN, 3, 60, 2000, 80, 2250, 100, 2500);
+        int distCm = sonar.getDistance();
+        if (distCm < 200) {            
+          int durMillis = 1000;
+          int freq = (1 - (distCm/180.) * 1000) + 1000;
+          MSound(SOUND_PIN, 1, 45, freq);
           proximityStartMillis = millis();
         }
       }
